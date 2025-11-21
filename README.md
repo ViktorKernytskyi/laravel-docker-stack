@@ -21,34 +21,49 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## About Laravel Docker Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Мінімальний та чистий Docker-стек для запуску Laravel + Nginx + PHP-FPM без встановлення PHP або вебсерверів локально.
+Підійде для навчання, pet-проєктів та швидкого старту власних застосунків.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+🚀 Технології
 
-## Laravel Sponsors
+Docker & Docker Compose
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Nginx
 
-### Premium Partners
+PHP-FPM
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Composer
 
-## Contributing
+Laravel (версія залежить від локальної установки)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+У майбутньому планується:
 
-## Code of Conduct
+PostgreSQL чи MySQL
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+📁 Структура проєкту
+.
+├── _docker/
+│   ├── app/            # Dockerfile для PHP-FPM
+│   └── nginx/          # Конфіг nginx
+├── docker-compose.yml
+├── public/
+└── README.md
+▶ Як запустити
+1️⃣ Клонувати репозиторій
+git clone https://github.com/USERNAME/laravel-docker-stack.git
+cd laravel-docker-stack
+2️⃣ Підняти контейнери
+docker compose up -d
+3️⃣ Встановити залежності Laravel
+docker compose exec app composer install
+4️⃣ Згенерувати APP_KEY
+docker compose exec app php artisan key:generate
+5️⃣ Відкрити в браузері
+http://localhost:8080
+
+Якщо бачиш Laravel або тестовий маршрут — все працює 👍
 
 ## Security Vulnerabilities
 
