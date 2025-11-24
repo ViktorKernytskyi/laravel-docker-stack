@@ -91,7 +91,60 @@ docker compose exec app php artisan key:generate
 
 ✔ Якщо бачиш Laravel або тестовий маршрут — все працює!
 
+🗄️ Підключення MySQL
 
+У docker-compose.yml включено контейнер MySQL:
+
+db:
+image: mysql:8.0
+restart: always
+volumes:
+- ./tmp/db:/var/lib/mysql
+environment:
+MYSQL_DATABASE: lardocker
+MYSQL_ROOT_PASSWORD: root
+ports:
+- "8101:3306"
+command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+container_name: project_db
+⚙ Налаштування .env
+
+Внесіть параметри:
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=lardocker
+DB_USERNAME=root
+DB_PASSWORD=root
+🧩 Міграції
+docker compose exec app php artisan migrate
+🧠 Доступ до MySQL з консолі
+docker exec -it project_db mysql -uroot -p
+
+Пароль root.
+
+🐳 Корисні команди
+
+Зупинити та видалити контейнери:
+
+docker compose down
+
+Перезапустити:
+
+docker compose restart
+
+Чистий rebuild:
+
+docker compose down -v
+docker compose up -d --build
+🔐 Безпека
+
+Не заливайте у git:
+
+/vendor/
+node_modules/
+.env
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
