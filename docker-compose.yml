@@ -23,3 +23,18 @@ services:
     volumes:
       - ./:/var/www/
     container_name: project_app
+
+  db:
+    image: mysql:8.0
+    restart: always
+    volumes:
+      - ./tmp/db:/var/lib/mysql #//This means: The database is stored on disk,  Will not be lost when docker-compose down
+    environment:
+      #The lardocker database and root password will be created.
+      MYSQL_DATABASE: lardocker
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+    #8101 → port on your PC, 3306 → port inside the container
+      - "8101:3306"
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    container_name: project_db
