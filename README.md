@@ -123,28 +123,24 @@ docker compose exec app php artisan migrate
 docker exec -it project_db mysql -uroot -p
 
 Пароль root.
-
-🐳 Корисні команди
-
-Зупинити та видалити контейнери:
-
-docker compose down
-
-Перезапустити:
-
+🐳 Docker команди
+Запустити проєкт
+docker compose up -d
+Перезапустити контейнери
 docker compose restart
-
-Чистий rebuild:
-
+Зупинити й видалити контейнери
+docker compose down
+Повний rebuild (з очищенням volume)
 docker compose down -v
 docker compose up -d --build
-🔐 Безпека
+🔐 Важливо: не комітити у Git
 
-Не заливайте у git:
+Додайте у .gitignore:
 
 /vendor/
-node_modules/
+/node_modules/
 .env
+
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
